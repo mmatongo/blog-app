@@ -52,7 +52,7 @@ rails s
 rspec
 ```
 
-## Authors
+## Author
 
 👤 **Usman**
 
