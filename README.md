@@ -54,7 +54,7 @@ rspec
 
 ## Author
 
-👤 **Usman**
+👤 **Daniel M. Matongo**
 
 - GitHub: [@mmatongo](https://github.com/mmatongo)
 - LinkedIn: [Daniel M. matongo](https://linkedin.com/in/mmatongo)
