@@ -1,7 +1,7 @@
 # Blog App
 
 > Classic blog website
-![screenshot](./1.png)
+![screenshot](screenshots/1.png)
 
 A simple blog app built using the Ruby on Rails framework.
 
@@ -52,7 +52,7 @@ rails s
 rspec
 ```
 
-## Authors
+## Author
 
 👤 **Usman**
 
