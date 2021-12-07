@@ -1,13 +1,13 @@
 class Post < ApplicationRecord
-  belongs_to :author, class_name: 'User', counter_cache: :posts_count
+  belongs_to :user, counter_cache: :posts_counter
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
 
-  def recent_comments
-    comments.last(5)
+  def recent_comments(limit = 5)
+    comments.last(limit)
   end
 
   def update_count(count)
-    user.update('posts_count', count)
+    user.update('posts_counter', count)
   end
 end
