@@ -19,18 +19,18 @@ ActiveRecord::Schema.define(version: 2021_11_30_150510) do
     t.string "text"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "user_id"
-    t.bigint "post_id"
+    t.bigint "user_id", null: false
+    t.bigint "post_id", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
   create_table "likes", id: false, force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "post_id", null: false
+    t.bigint "user_id"
+    t.bigint "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id", "post_id"], name: "index_likes_on_user_id_and_post_id", unique: true
+    t.index ["user_id", "post_id"], name: "index_likes_on_user_id_and_post_id"
   end
 
   create_table "posts", force: :cascade do |t|
