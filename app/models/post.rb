@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  validates :title, presence: true, length: { maximum: 250, too_long: '%{count} characters is the maximum allowed' }
+  validates :title, presence: true, length: { maximum: 250, too_long: '%<count>s characters is the maximum allowed' }
   validates :comments_counter, :likes_counter, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
   belongs_to :user, counter_cache: :posts_counter
