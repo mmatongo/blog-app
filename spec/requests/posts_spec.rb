@@ -11,10 +11,6 @@ RSpec.describe 'Posts', type: :request do
     it 'should return the rendered template' do
       expect(response).to render_template('index')
     end
-
-    it 'should include correct placeholder text' do
-      expect(response.body).to include('Here is a list of posts for a given user')
-    end
   end
 
   describe 'test GET #show' do
@@ -26,10 +22,6 @@ RSpec.describe 'Posts', type: :request do
 
     it 'should return the rendered template' do
       expect(response).to render_template('show')
-    end
-
-    it 'return correct placeholder text' do
-      expect(response.body).to include('Here is a detailed page of a post')
     end
   end
 end
