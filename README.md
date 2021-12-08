@@ -52,7 +52,17 @@ rails s
 ### Test
 
 ```sh
-rspec
+rake rspec
+```
+#### IF TESTS FAIL
+```sh
+RAILS_ENV=test rake db:reset
+``
+<br>
+then
+<br>
+```sh
+rake db:seed
 ```
 
 ## Author
