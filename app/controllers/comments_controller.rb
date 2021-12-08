@@ -6,10 +6,10 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html do
         if comment.save
-          redirect_to post_path(post), notice: 'Comment was successfully created.'
+          redirect_to user_post_path(post.user.id, post.id), notice: 'Comment was successfully created.'
         else
           flash[:alert] = 'Failed to add comment!'
-          redirect_to post_path(post)
+          redirect_to user_post_path(post.user.id, post.id)
         end
       end
     end

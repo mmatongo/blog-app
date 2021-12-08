@@ -6,9 +6,9 @@ class LikesController < ApplicationController
     respond_to do |format|
       format.html do
         if like.save
-          redirect_to post_path(post), notice: 'You liked this post'
+          redirect_to user_post_path(post.user.id, post.id), notice: 'You liked this post'
         else
-          redirect_to post_path(post), alert: 'Failed to like this post'
+          redirect_to user_post_path(post.user.id, post.id), alert: 'Failed to like this post'
         end
       end
     end
