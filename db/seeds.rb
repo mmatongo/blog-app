@@ -24,5 +24,6 @@
 					post: post
 				)
 			end
+			post.likes.create(user: user)
 		end
 end
