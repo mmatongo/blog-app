@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   describe 'validations' do
-    subject { Post.new(title: 'title', text: 'body', user_id: 0 ) }
+    subject { Post.new(title: 'title', text: 'body', user_id: 0) }
 
     before { subject.save }
-    
+
     it 'should have a title' do
       subject.title = nil
       expect(subject).to_not be_valid
@@ -20,7 +20,7 @@ RSpec.describe Post, type: :model do
       subject.user_id = nil
       expect(subject).to_not be_valid
     end
-    
+
     it 'should have a body less than or equal to 250 characters' do
       subject.text = 'a' * 251
       expect(subject).to_not be_valid
