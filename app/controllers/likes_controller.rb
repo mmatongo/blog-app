@@ -13,4 +13,15 @@ class LikesController < ApplicationController
       end
     end
   end
+
+  def destroy
+    post = Post.find(params[:post_id])
+    post.user.delete(current_user)
+
+    respond_to do |format|
+      format.html do
+        redirect_to user_post_path(post.user.id, post.id), notice: 'You unliked this post'
+      end
+    end
+  end
 end
