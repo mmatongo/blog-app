@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     resources :likes, only: [:create]
   end
 
+  devise_for :users
+
   # post '/posts/new', to: 'posts#create', as: 'create_post'
 
 end
