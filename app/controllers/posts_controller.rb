@@ -21,7 +21,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html do
         if @post.save
-          redirect_to user_posts_path(@post.user.id, @post.id), notice: 'Post was successfully created.'
+          redirect_to user_new_posts_path(@post.user.id, @post.id), notice: 'Post was successfully created.'
         else
           flash[:alert] = 'Post was not created.'
           render :new
@@ -30,7 +30,7 @@ class PostsController < ApplicationController
     end
   end
 
-  
+  private
 
   def post_params
     params.require(:post).permit(:title, :text)
