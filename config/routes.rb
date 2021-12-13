@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root 'users#index'
 
   resources :users, only: [:index, :show] do
@@ -11,5 +12,9 @@ Rails.application.routes.draw do
   end
 
   post '/posts/new', to: 'posts#create', as: 'create_post'
+
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
 
 end

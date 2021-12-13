@@ -1,4 +1,5 @@
 <%= render partial: "users/user", object: @user %>
+<%= render "users/header" %>
 <% @posts.each do |post| %>
   <%= render partial: "post", object: post %>
   <%= render partial: "shared/comment", collection: post.recent_comments %>

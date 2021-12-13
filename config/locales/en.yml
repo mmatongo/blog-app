@@ -37,4 +37,5 @@ en:
   by: "by %{name}"
   posted_on: "Posted on %{date}"
   create_post: "Create Post"
+  sign_out: "Sign out"
   time_ago: "%{time} ago"
