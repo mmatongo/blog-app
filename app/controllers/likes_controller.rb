@@ -15,12 +15,13 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    post = Post.find(params[:post_id])
-    post.user.delete(current_user)
+    post = Post.find(params[:id])
 
     respond_to do |format|
-      format.html do
-        redirect_to user_post_path(post.user.id, post.id), notice: 'You unliked this post'
+      if post.users.delete(current_user)
+        format.html { redirect_to user_post_path(post.user.id, post.id) }
+      else
+        format.html { redirect_to user_post_path(post.user.id, post.id), alert: 'Failed to unlike post!' }
       end
     end
   end
