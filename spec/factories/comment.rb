@@ -4,7 +4,7 @@ FactoryBot.define do
     post
     text { 'This is a test Comment' }
   end
-  
+
   factory :like do
     post
     user

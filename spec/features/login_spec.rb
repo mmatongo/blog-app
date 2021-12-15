@@ -1,38 +1,52 @@
 require 'rails_helper'
 
-RSpec.describe 'Login', type: :feature do
-  # background { visit new_user_session_path }
+RSpec.describe 'Log in', type: :feature do
+  describe 'index page for users' do
+    it 'has the "Log in" button' do
+      visit user_session_path
+      expect(page).to have_content 'Log in'
+    end
 
-  scenario 'login form is displayed' do
-    visit new_user_session_path 
-    expect(page).to have_field?('user_email')
-    expect(page).to have_field?('user_password')
-    expect(page).to have_button?('Log in')
-  end
+    it 'has password and username inputs' do
+      visit user_session_path
+      expect(page).to have_field 'Email'
+      expect(page).to have_field 'Password'
+    end
 
-  context 'submit' do
-    scenario 'without email and password' do
+    it 'displays an error when submitting without filling the fields' do
+      visit user_session_path
+      click_button 'Log in'
+      expect(page).to have_content 'Invalid Email or password.'
+    end
+
+    it 'displays an error when submitting an incorrect Email or password' do
+      User.create(
+        name: 'John Smith',
+        email: 'correct@email.com',
+        password: 'correctpassword',
+        confirmed_at: Time.now
+      )
+
+      visit user_session_path
+      fill_in 'Email', with: 'wrong@email.com'
+      fill_in 'Password', with: 'wrongpassword'
       click_button 'Log in'
       expect(page).to have_content 'Invalid Email or password'
     end
 
-    scenario 'with invalid email and password' do
-      within 'form' do
-        fill_in 'user_email', with: 'user@example.com'
-        fill_in 'user_password', with: 'password'
-      end
-      click_button 'Log in'
-      expect(page).to have_content 'Invalid Email or password'
-    end
+    it 'successfully logs in' do
+      User.create(
+        name: 'John Smith',
+        email: 'correct@email.com',
+        password: 'correctpassword',
+        confirmed_at: Time.now
+      )
 
-    # given(:other_user) { FactoryBot.create(:user) }
-    # scenario 'with valid email and password' do
-    #   within 'form' do
-    #     fill_in 'user_email', with: other_user.email
-    #     fill_in 'user_password', with: other_user.password
-    #   end
-    #   click_button 'Log in'
-    #   expect(page).to have_content 'Signed in successfully.'
-    # end
+      visit user_session_path
+      fill_in 'Email', with: 'correct@email.com'
+      fill_in 'Password', with: 'correctpassword'
+      click_button 'Log in'
+      expect(page).to have_current_path(root_path)
+    end
   end
 end
