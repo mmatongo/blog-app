@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Posts', type: :request do
+  login_user
+
   describe 'test GET #index' do
     before(:example) { get user_posts_path(1) }
 
@@ -14,7 +16,10 @@ RSpec.describe 'Posts', type: :request do
   end
 
   describe 'test GET #show' do
-    before(:example) { get user_post_path(1, 1) }
+    before(:example) do
+      post = FactoryBot.create :post, user: @user
+      get user_post_path(@user.id, post.id)
+    end
 
     it 'return correct response status' do
       expect(response).to have_http_status(:ok)
