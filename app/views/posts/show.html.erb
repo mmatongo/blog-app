@@ -1,22 +1,16 @@
 <div class="content">
-  <div class="post-header">
-    <div>
-      <p><%= t('post', id: @post.id) %> <%= t('by', name: @user.name) %></p>
-    </div>
-    <div>
+  <div class="media-content">
+    <div class="content">
+      <strong><%= @user.name %></strong>
+      <p class="is-size-7 is-italic"><%= t('posted_on', date: @post.created_at.to_s(:nice_date)) %></p>
       <p class="is-size-7"><%= t('comments_counter', count: @post.comments_counter) %>, <%= t('likes_counter', count: @post.likes_counter) %></p>
+      <%= render 'header' %>
     </div>
   </div>
-  <p class="is-size-7 is-italic"><%= t('posted_on', date: @post.created_at.to_s(:nice_date)) %></p>
-  <div class="post-title-container">
-    <h1 class="title"><%= @post.title %></h1>
-    <% if @liked %>
-      <%= render partial: "unlike_post", post: @post %>
-    <% else %>
-      <%= render partial: "like_post", post: @post %>
-    <% end %>
+  <div class="content">
+    <h1><%= @post.title %></h1>
+    <p><%= @post.text %></p>
   </div>
-  <p><%= @post.text %></p>
 </div>
 <%= render partial: "new_comment", post: @post %>
 <%= render partial: "shared/comment", collection: @comments %>

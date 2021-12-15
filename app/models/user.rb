@@ -13,4 +13,8 @@ class User < ApplicationRecord
   def recent_posts(limit = 3)
     posts.includes(:comments).last(limit)
   end
+
+  def admin?
+    role == 'admin'
+  end
 end

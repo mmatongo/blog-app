@@ -14,23 +14,27 @@
   <header>
     <nav>
   			<% if user_signed_in? %>
-					<%= link_to t('sign_out'), destroy_user_session_path(current_user), method: :delete, class: "button is-primary is-pulled-right mt-2 mr-5" %>
+					<%= button_to t('sign_out'), destroy_user_session_path, method: :delete, class: "button is-danger is-pulled-right mt-2 mr-5" %>
+          <%= link_to t('create_post'), new_post_path, class: "button is-primary is-pulled-left mt-2 ml-5" %>
 				<% end %>
     </nav>
   </header>
 
   <body>
-  <% if notice.present? %>
-    <div class="notification is-link is-light"><%= notice %></div>
-  <% end %>
-  <% if alert.present? %>
-    <div class="notification is-danger is-light"><%= alert %></div>
-  <% end %>
-
   <div class="section">
-    <div class="container">
-      <%= yield %>
+      <div class="container">
+        <% if alert.present? %>
+          <div class="notification is-danger is-light">
+            <%= alert %>
+          </div>
+        <% end %>
+        <% if notice.present? %>
+          <div class="notification is-link is-light mt-2">
+            <%= notice %>
+          </div>
+        <% end %>
+        <%= yield %>
+      </div>
     </div>
-  </div>
   </body>
 </html>
