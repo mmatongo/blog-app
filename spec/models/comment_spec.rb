@@ -5,7 +5,7 @@ RSpec.describe Comment, type: :model do
     subject { FactoryBot.build :comment }
 
     it 'should update the post comments counter' do
-      subject.update_counter(2)
+      subject.update_count(2)
       expect(subject.post.comments_counter).to be(2)
     end
   end

@@ -42,7 +42,7 @@ RSpec.describe Post, type: :model do
     subject { FactoryBot.build :post }
 
     it 'should update the users post count' do
-      subject.update_counter(2)
+      subject.update_count(2)
       expect(subject.user.posts_counter).to be(2)
     end
   end

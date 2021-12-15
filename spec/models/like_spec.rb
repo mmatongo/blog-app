@@ -5,7 +5,7 @@ RSpec.describe Like, type: :model do
     subject { FactoryBot.build :like }
 
     it 'should update the post likes counter' do
-      subject.update_counter(2)
+      subject.update_count(2)
       expect(subject.post.likes_counter).to be(2)
     end
   end
