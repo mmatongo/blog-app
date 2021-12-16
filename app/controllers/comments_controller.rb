@@ -8,24 +8,23 @@ class CommentsController < ApplicationController
     respond_to do |format|
       format.html do
         if comment.save
-          redirect_to user_post_path(post.user.id, post.id), notice: 'Comment was successfully created.'
+          flash[:notice] = 'Comment was successfully created.'
         else
           flash[:alert] = 'Failed to add comment!'
-          redirect_to user_post_path(post.user.id, post.id)
         end
+        redirect_to user_post_path(post.user.id, post.id)
       end
     end
   end
 
   def destroy
     comment = Comment.find params[:id]
-    post = comment.post
 
-    respond_to do |format|
+    respond_to do |_format|
       if comment.destroy
-        format.html { redirect_to user_post_path(post.user.id, post.id), notice: 'Comment deleted!' }
+        flash[:notice] = 'Comment deleted!'
       else
-        format.html { redirect_to user_post_path(post.user.id, post.id), alert: 'Failed to delete comment!' }
+        flash[:alert] = 'Failed to delete comment!'
       end
     end
   end

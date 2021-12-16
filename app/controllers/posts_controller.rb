@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   load_and_authorize_resource
+  skip_authorize_resource only: [:all_posts]
 
   def index
     @user = User.find(params[:user_id])
@@ -24,27 +25,21 @@ class PostsController < ApplicationController
   def update
     @post = Post.find params[:id]
 
-    respond_to do |format|
-      if @post.update post_params
-        format.html { redirect_to user_post_path(@post.user.id, @post.id), notice: 'Post edited successfully!' }
-      else
-        format.html { render :new }
-      end
+    if @post.update post_params
+      format.html { redirect_to user_post_path(@post.user.id, @post.id), notice: 'Post edited successfully!' }
+    else
+      render :new
     end
   end
 
   def create
     @post = current_user.posts.new(post_params)
 
-    respond_to do |format|
-      format.html do
-        if @post.save
-          redirect_to user_post_path(@post.user.id, @post.id), notice: 'Post was successfully created.'
-        else
-          flash[:alert] = 'Post was not created.'
-          render :new
-        end
-      end
+    if @post.save
+      redirect_to user_post_path(@post.user.id, @post.id), notice: 'Post was successfully created.'
+    else
+      flash[:alert] = 'Post was not created.'
+      render :new
     end
   end
 
@@ -52,13 +47,12 @@ class PostsController < ApplicationController
     post = Post.find params[:id]
     user = post.user
 
-    respond_to do |format|
-      if post.destroy
-        format.html { redirect_to user_path(user.id), notice: 'Post has been deleted!' }
-      else
-        format.html { redirect_to user_path(user.id), alert: 'Failed to delete post!' }
-      end
+    if post.destroy
+      flash[:notice] = 'Post has been deleted!'
+    else
+      flash[:alert] = 'Failed to delete post!'
     end
+    redirect_to user_path(user.id)
   end
 
   private
