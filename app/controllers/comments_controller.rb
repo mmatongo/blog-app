@@ -19,7 +19,6 @@ class CommentsController < ApplicationController
 
   def destroy
     comment = Comment.find params[:id]
-    post = comment.post
 
     respond_to do |_format|
       if comment.destroy
